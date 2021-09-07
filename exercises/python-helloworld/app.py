@@ -1,7 +1,7 @@
 from flask import Flask
-app = Flask(__name__)
+from flask import json
 
-import json
+app = Flask(__name__)
 
 @app.route("/")
 def hello():
@@ -9,18 +9,34 @@ def hello():
 
 @app.route("/status")
 def getStatus():
-    return json.dumps({
-        'result':'OK - healthy'
-    })
+    response = app.response_class(
+        response=json.dumps(
+            {
+                "result":"OK - healthy"
+            }
+        ),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route("/metrics")
 def getMetrics():
-    return json.dumps({
-        'data': {
-            'userCount': 140,
-            'userCountActive': 23
-        }
-    })
+    response = app.response_class(
+        response=json.dumps(
+            {
+                "status":"success",
+                "code":0,
+                "data":{
+                    "UserCount":140,
+                    "UserCountActive":23
+                }
+            }
+        ),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
