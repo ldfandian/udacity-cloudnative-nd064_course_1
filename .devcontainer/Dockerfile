@@ -15,6 +15,9 @@ RUN apt-get -y install git iproute2 procps lsb-release vim build-essential pytho
 # Setup python web framework: Flask
 RUN pip install Flask
 
+# Setup golang
+RUN apt-get -y install golang
+
 # Cleanup
 RUN apt-get autoremove -y \
   && apt-get clean -y \
@@ -23,9 +26,10 @@ RUN apt-get autoremove -y \
 # Revert workaround at top layer.
 ENV DEBIAN_FRONTEND=dialog
 
-# Expose service ports.
+# Expose service ports (5000:Flask default port, 6111:golang default port).
 EXPOSE 8000
 EXPOSE 5000
+EXPOSE 6111
 
 # Set working directory 
 #WORKDIR /mnt/devroot/src/
