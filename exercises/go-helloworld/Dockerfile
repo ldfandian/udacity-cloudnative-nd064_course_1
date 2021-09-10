@@ -6,6 +6,6 @@ add . .
 ENV GO111MODULE off
 RUN go build -o helloworld
 
-expose 6111
+expose 6112
 
 cmd ["./helloworld"]
