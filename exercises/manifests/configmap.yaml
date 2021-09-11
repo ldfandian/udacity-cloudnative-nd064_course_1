@@ -3,5 +3,6 @@ data:
   version: alpine
 kind: ConfigMap
 metadata:
+  creationTimestamp: null
   name: nginx-version
-  namespace: demo
+  namespace: demo2
