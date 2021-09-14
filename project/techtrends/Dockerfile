@@ -15,7 +15,7 @@ RUN apt-get -y install sqlite3
 
 # Add python application and install dependencies.
 WORKDIR /opt/src/app/techtrends/
-COPY . .
+COPY ./techtrends/ .
 RUN pip install -r requirements.txt
 
 # Init the database
