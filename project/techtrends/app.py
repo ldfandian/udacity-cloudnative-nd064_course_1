@@ -98,7 +98,7 @@ def create():
 
     return render_template('create.html')
 
-@app.route("/status")
+@app.route("/healthz")
 def getStatus():
     response = app.response_class(
         response=json.dumps(
