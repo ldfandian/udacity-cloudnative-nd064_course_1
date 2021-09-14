@@ -10,7 +10,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'project/**'
+      - 'project/techtrends/**'
       - '.github/workflows/techtrends*'
 
 ## List the steps to be executed by the workflow
