@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 'nginx-staging'
+  namespace: argocd
+spec:
+  destination:
+    namespace: 'default'
+    server: 'https://kubernetes.default.svc'
+  source:
+    helm:
+      valueFiles:
+        - values-staging.yaml
+    path: 'exercises/argocd-helm-exercise'
+    repoURL: 'https://github.com/ldfandian/udacity-cloudnative-nd064_course_1'
+    targetRevision: HEAD
+    directory:
+      recurse: false
+  project: default
+  syncPolicy: {}
