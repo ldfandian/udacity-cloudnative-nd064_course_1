@@ -1,2 +1,4 @@
-__pycache__
 *.log
+*.db
+__pycache__
+.DS_Store

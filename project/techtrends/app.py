@@ -73,7 +73,7 @@ def post(post_id):
         app.logger.info('A non-existing article is accessed and a 404 page is returned.')
         return render_template('404.html'), 404
     else:
-        app.logger.info(f'An existing article is retrieved. Title: {post["title"]}')
+        app.logger.info('An existing article is retrieved. Title: ' + post["title"])
         return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -93,7 +93,7 @@ def create():
             flash('Title is required!')
         else:
             create_post(title, content)
-            app.logger.info(f'A new article is created. Title: {title}')
+            app.logger.info('A new article is created. Title: ' + title)
             return redirect(url_for('index'))
 
     return render_template('create.html')
