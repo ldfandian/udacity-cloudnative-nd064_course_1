@@ -6,8 +6,6 @@ import threading
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
-from flask import json
-
 # Utils class to establish database connection, and track total connection count
 class DatabaseConnection(object):
     counterLock = threading.Lock()
