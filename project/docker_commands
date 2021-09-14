@@ -1,8 +1,11 @@
 ## Docker commands used to build the application 
-# docker build -t udacity-techtrends ./techtrends/
+# docker build -t udacity-techtrends -f ./techtrends/Dockerfile .
 
 ## Docker commands used to run the application
 # docker run --rm -d -p 7111:3111/tcp --name udacity-techtrends-container udacity-techtrends
+
+## The command to kill the container
+# docker stop  udacity-techtrends-container 
 
 ## Docker commands used to get the application logs
 # docker logs -f udacity-techtrends-container
