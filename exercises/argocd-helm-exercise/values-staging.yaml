@@ -1,0 +1,17 @@
+namespace:
+  name: staging
+
+deployment:
+  replicaCount: 1
+  image:
+    name: nginx
+    tag: 1.18.0
+  template:
+    resources:
+      cpu: 50m
+      memory: 128Mi
+
+configMap:
+  data:
+    version: 1.18.0
+
