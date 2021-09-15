@@ -70,7 +70,7 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-        app.logger.info('A non-existing article is accessed and a 404 page is returned.')
+        app.logger.error('A non-existing article is accessed and a 404 page is returned.')
         return render_template('404.html'), 404
     else:
         app.logger.info('An existing article is retrieved. Title: ' + post["title"])
@@ -135,7 +135,25 @@ def getMetrics():
 
     return response
 
+class StdoutLoggerFilter(logging.Filter):
+    def filter(self, rec):
+        return rec.levelno in (logging.DEBUG, logging.INFO)
+
 # start the application on port 3111
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
+    # initialize logger
+    # 1. log format: INFO:werkzeug:127.0.0.1 - - [08/Jan/2021 22:40:06] "GET /metrics HTTP/1.1" 200 -
+    logFormatter = logging.Formatter('%(levelname)s:%(name)s:%(asctime)s:%(message)s')
+    stdoutLogger = logging.StreamHandler(sys.stdout)
+    # 2. split log to stdout (level: from debug to info) and stderr (level: warn+)
+    stdoutLogger.setLevel(logging.DEBUG)
+    stdoutLogger.addFilter(StdoutLoggerFilter())
+    stdoutLogger.setFormatter(logFormatter)
+    stderrLogger = logging.StreamHandler(sys.stderr)
+    stderrLogger.setLevel(logging.WARNING)
+    stderrLogger.setFormatter(logFormatter)
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().addHandler(stdoutLogger)
+    logging.getLogger().addHandler(stderrLogger)
+
     app.run(host='0.0.0.0', port='3111')
